@@ -27,7 +27,7 @@ class ProjectViewModel: ObservableObject {
     }
     
     func observeListOject() {
-        ref.child("Sheet 1").child("Page 1")
+        ref.child("1MNzS1FRBUY27KJlPVnffVA8rcvbZLpEmuxRoUGwKmgs").child("Confirmed Records")
             .observe(.value){ parentSnapshot in
             guard let children = parentSnapshot.children.allObjects as? [DataSnapshot] else {
                 return

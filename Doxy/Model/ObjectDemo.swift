@@ -8,7 +8,13 @@
 import Foundation
 
 class ObjectDemo: Encodable, Decodable, Identifiable {
+    var Artist: String = ""
+    var Fee: Double = 0
     var ID : String = ""
+    var InvoiceStatus: String = "Pending"
+    var PaymentStatus: String = "Pendng"
+    var Points: Double = 0
+    var SignedDeal: String = "Pending"
     var Song: String = ""
     
     

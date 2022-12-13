@@ -35,6 +35,7 @@ struct RecordsView: View {
            
         }
         .onAppear{
+            viewModel.observeListOject()
             withAnimation(.easeOut.delay(0.3)) {
                 apear[0] = true
             }
@@ -156,32 +157,29 @@ struct RecordsView: View {
                 .multilineTextAlignment(.leading)
                 .foregroundStyle(.linearGradient(colors: [.primary.opacity(0.5), .primary], startPoint: .topLeading, endPoint: .bottomTrailing))
                 .padding(.horizontal, 30)
-//            List(projectListVM.projectItemViewModels) { projectItemVM in
-//                ProjectItem(projectItemVM: projectItemVM, title: projectItemVM.project.Title, artist: projectItemVM.project.Artist, fee: projectItemVM.project.fee)
-//                    .frame(maxHeight: 80)
+            List(viewModel.listObject) { projectItemVM in
+                ProjectItem(title: projectItemVM.Song, artist: projectItemVM.Artist, fee: projectItemVM.Fee)
+                    .frame(maxHeight: 80)
+
+            }
+            .mask(RoundedRectangle(cornerRadius: 30, style:.continuous))
+            .shadow(color: Color("Shadow").opacity(0.3), radius: 10, x: 0, y: 10)
+            .frame(maxWidth: .infinity)
+            .frame(height: 280)
+            .scrollContentBackground(.hidden)
+//            if !viewModel.listObject.isEmpty {
+//                VStack {
+//                    ScrollView {
+//                        ForEach(viewModel.listObject ) { object in
+//                            VStack {
+//                                ProjectItem(title: object.Song, artist: object.Artist, fee: object.Fee)
+//                            }
 //
+//                        }
+//                    }
+//                }
 //            }
-//            .mask(RoundedRectangle(cornerRadius: 30, style:.continuous))
-//            .shadow(color: Color("Shadow").opacity(0.3), radius: 10, x: 0, y: 10)
-//            .frame(maxWidth: .infinity)
-//            .frame(height: 280)
-//            .scrollContentBackground(.hidden)
-            if !viewModel.listObject.isEmpty {
-                VStack {
-                    ForEach(viewModel.listObject ) { object in
-                        VStack {
-                            Text(String(object.ID))
-                            Text(object.Song)
-                        }
-                       
-                    }
-                }
-            }
-            Button {
-                viewModel.observeListOject()
-            }label: {
-                Text( "Read")
-            }
+           
             
             
         }
