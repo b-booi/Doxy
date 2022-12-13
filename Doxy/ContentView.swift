@@ -20,8 +20,8 @@ struct ContentView: View {
             if log_Status{
                 TabBar()
             }else {
-                //Login()
-                TabBar()
+                Login()
+                //TabBar()
             }
           
         }

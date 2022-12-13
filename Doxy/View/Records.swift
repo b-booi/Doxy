@@ -14,7 +14,7 @@ struct Records: View {
             Image("gold_record")
                 .resizable(resizingMode: .stretch)
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 30.0, height: 30.0)
+                .frame(width: 40.0, height: 40.0)
                 .cornerRadius(40)
                 .background(.ultraThickMaterial, in :RoundedRectangle(cornerRadius: 30, style: .continuous))
                 .shadow(color: Color("Shadow").opacity(0.2), radius: 5, x: 0, y: 4)

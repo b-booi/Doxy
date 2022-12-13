@@ -157,28 +157,28 @@ struct RecordsView: View {
                 .multilineTextAlignment(.leading)
                 .foregroundStyle(.linearGradient(colors: [.primary.opacity(0.5), .primary], startPoint: .topLeading, endPoint: .bottomTrailing))
                 .padding(.horizontal, 30)
-            List(viewModel.listObject) { projectItemVM in
-                ProjectItem(title: projectItemVM.Song, artist: projectItemVM.Artist, fee: projectItemVM.Fee)
-                    .frame(maxHeight: 80)
+            if !viewModel.listObject.isEmpty {
+                List(viewModel.listObject) { projectItemVM in
+                    ProjectItem(title: projectItemVM.Song, artist: projectItemVM.Artist, fee: projectItemVM.Fee)
+                        .frame(maxHeight: 80)
 
-            }
-            .mask(RoundedRectangle(cornerRadius: 30, style:.continuous))
-            .shadow(color: Color("Shadow").opacity(0.3), radius: 10, x: 0, y: 10)
-            .frame(maxWidth: .infinity)
-            .frame(height: 280)
+                }
+                .mask(RoundedRectangle(cornerRadius: 30, style:.continuous))
+                .shadow(color: Color("Shadow").opacity(0.3), radius: 10, x: 0, y: 10)
+                .frame(maxWidth: .infinity)
+                .frame(height: 280)
             .scrollContentBackground(.hidden)
-//            if !viewModel.listObject.isEmpty {
-//                VStack {
-//                    ScrollView {
-//                        ForEach(viewModel.listObject ) { object in
-//                            VStack {
-//                                ProjectItem(title: object.Song, artist: object.Artist, fee: object.Fee)
-//                            }
-//
-//                        }
-//                    }
-//                }
-//            }
+            }else {
+                VStack {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .purple))
+                        .scaleEffect(3)
+                        .padding(20)
+                        .frame(maxWidth: .infinity)
+                }
+                
+            }
+
            
             
             
@@ -190,23 +190,28 @@ struct RecordsView: View {
             ZStack {
                 VStack(alignment: .center){
                     
-                    Text(getTotalClearedFees(projects:projects))
+                    Text(getTotalClearedFees(projects:viewModel.listObject))
                         .font(.title)
                         .fontWeight(.bold)
-                    //Text("\(String(format: "$%.02f", getTotalOutstandingFees(projects: projects)))"+" \npending")
-                    Text(getTotalOutstandingFees(projects:projects))
+                    Text(getTotalOutstandingFees(projects:viewModel.listObject))
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
+                    
                     Text("Outstanding")
                         .font(.subheadline)
                         .fontWeight(.bold)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
+                        
                 }
-                CircularView(paidValue: getProgressPosition(projects: projects), pendingValue: getPendingPosition(projects: projects), appear: $show)
-                    .frame(maxWidth: 220)
+              
+                    CircularView(paidValue: getProgressPosition(projects: viewModel.listObject), pendingValue: getPendingPosition(projects: viewModel.listObject), appear: $show)
+                        .frame(maxWidth: 220)
+                
+                
+                    
 //                CircularView(value: getProgressPosition(projects: projects, pendingValue: 0.7, appear: $show)
 //
                     
@@ -225,14 +230,14 @@ struct RecordsView_Previews: PreviewProvider {
     }
 }
 
-func getTotalClearedFees(projects: [Project]) -> String {
+func getTotalClearedFees(projects: [ObjectDemo]) -> String {
     var totalClearedFees = 0.0
     let nf = NumberFormatter()
     nf.maximumFractionDigits = 0
     nf.numberStyle = .currency
     for project in projects {
-        if(project.Paid){
-            totalClearedFees += project.fee
+        if(project.PaymentStatus == "Paid"){
+            totalClearedFees += project.Fee
         }
         
     }
@@ -241,15 +246,15 @@ func getTotalClearedFees(projects: [Project]) -> String {
   
 }
 
-func getTotalOutstandingFees(projects: [Project]) -> String {
+func getTotalOutstandingFees(projects: [ObjectDemo]) -> String {
     var totalOutstandingFees = 0.0
     let nf = NumberFormatter()
     nf.maximumFractionDigits = 0
     nf.numberStyle = .currency
    
     for project in projects {
-        if(!project.Paid){
-            totalOutstandingFees += project.fee
+        if(project.PaymentStatus == "Pending"){
+            totalOutstandingFees += project.Fee
         }
         
     }
@@ -259,23 +264,23 @@ func getTotalOutstandingFees(projects: [Project]) -> String {
   
 }
 
-func getProgressPosition (projects: [Project]) -> Double {
+func getProgressPosition (projects: [ObjectDemo]) -> Double {
     var paidProgress = 0.0
     var sum = 0.0
     for project in projects {
-        if (project.Paid){
-            sum += project.fee
+        if (project.PaymentStatus == "Paid"){
+            sum += project.Fee
         }
         paidProgress = sum/72000
     }
     return paidProgress
 }
 
-func getPendingPosition (projects: [Project]) -> Double {
+func getPendingPosition (projects: [ObjectDemo]) -> Double {
     var pendingProgress = 0.0
     var sum = 0.0
     for project in projects {
-        sum += project.fee
+        sum += project.Fee
         
     }
     pendingProgress = sum/72000
