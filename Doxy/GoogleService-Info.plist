@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>371688434932-anvep9janpsr97ppbuml0i5l5o3j1skj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.371688434932-anvep9janpsr97ppbuml0i5l5o3j1skj</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBrzDBdNff5fDqRxKew_g19qvkga_6vcQc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>371688434932</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.Africanbooi.Doxy</string>
+	<key>PROJECT_ID</key>
+	<string>sillytest-1a83b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sillytest-1a83b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:371688434932:ios:034fffa600a76a010b02a1</string>
+	<key>DATABASE_URL</key>
+	<string>https://sillytest-1a83b-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
